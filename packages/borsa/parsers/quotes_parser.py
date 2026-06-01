@@ -1,4 +1,5 @@
 from bs4 import BeautifulSoup
+from ..models.quote import Quote
 
 class QuotesParser:
   def parse(self, html: str):
@@ -9,9 +10,10 @@ class QuotesParser:
       text = item.select_one('.text').get_text()
       author = item.select_one('.author').get_text()
 
-      quotes.append({
-        'text': text,
-        'author': author
-      })
+      quotes.append(
+        Quote(
+          text=text,
+          author=author,
+      ))
 
     return quotes
